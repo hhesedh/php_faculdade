@@ -31,7 +31,7 @@ function traduz_data_para_banco($data){
 	return $data_mysql;
 }
 
-function traduz_para_exibir($data){
+function traduz_data_para_exibir($data){
 	if ($data == "" OR $data == "0000-00-00"){
 		return "";
 	}

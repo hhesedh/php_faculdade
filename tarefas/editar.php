@@ -1,11 +1,10 @@
-<?php 
-
+<?php
 session_start();
 
 include_once "banco.php";
 include_once "ajudantes.php";
 
-$exibir_tabela = true;
+$exibir_tabela = false;
 
 if (isset($_GET['nome']) && $_GET['nome'] != '') {
 	$tarefa = array();
@@ -32,21 +31,13 @@ if (isset($_GET['nome']) && $_GET['nome'] != '') {
 		$tarefa['concluida'] = 0;
 	}
 
-	gravar_tarefa($conexao, $tarefa);
+	editar_tarefa($conexao, $tarefa);
 	header('Location: tarefas.php');
 	die();
 }
 
 
-$lista_tarefas = buscar_tarefas($conexao);
+$tarefa = buscar_tarefa($conexao, $_GET['id']);
 
-$tarefa = array(
-	'id'    => 0,
-	'nome'  => '',
-	'descricao' => '',
-	'prazo' => '',
-	'prioridade' => 1,
-	'concluida' => ''
-);
 include_once "template.php";
 
