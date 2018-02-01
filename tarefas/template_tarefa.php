@@ -32,11 +32,14 @@
 				<th>Opções</th>
 			</tr>
 			<?php foreach ($anexos as $anexo) : ?>
-				<tr>
+				<tr style="text-align: center;">
 					<td><?php echo $anexo['nome']; ?></td>
 					<td>
 						<a href="anexos/<?php echo $anexo['arquivo']; ?>">
 							Download
+						</a>
+						<a href="remover_arquivo.php?id=<?php echo $tarefa['id']; ?>">
+							Remover
 						</a>
 					</td>
 				</tr>

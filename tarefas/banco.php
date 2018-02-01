@@ -68,6 +68,18 @@ function remover_tarefa($conexao, $id) {
 
 }
 
+function remover_anexo($conexao, $id) {
+	$sqlBuscarNome = "SELECT nome FROM anexos WHERE tarefa_id = {$id}";
+	$resultado =  mysqli_query($conexao, $sqlBuscarNome);
+	$resultado = mysqli_fetch_assoc($resultado);
+	unlink("anexos/{$resultado['nome']}");
+
+	$sqlRemover = "DELETE FROM anexos WHERE tarefa_id = {$id}";
+
+	mysqli_query($conexao, $sqlRemover);
+
+}
+
 function gravar_anexo($conexao, $anexo) {
 	$sqlGravar = " INSERT INTO anexos
 		(tarefa_id, nome, arquivo)
