@@ -38,7 +38,7 @@
 						<a href="anexos/<?php echo $anexo['arquivo']; ?>">
 							Download
 						</a>
-						<a href="remover_arquivo.php?id=<?php echo $anexo['id']; ?>&tarefa_id=<?php echo $tarefa['id'];?>">
+						<a href="remover_arquivo.php?id=<?php echo $anexo['id']. '&tarefa_id='. $tarefa['id'];?>">
 							Remover
 						</a>
 					</td>
