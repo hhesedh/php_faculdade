@@ -69,12 +69,13 @@ function remover_tarefa($conexao, $id) {
 }
 
 function remover_anexo($conexao, $id) {
-	$sqlBuscarNome = "SELECT nome FROM anexos WHERE tarefa_id = {$id}";
+	$sqlBuscarNome = "SELECT nome FROM anexos WHERE id = {$id}";
+
 	$resultado =  mysqli_query($conexao, $sqlBuscarNome);
 	$resultado = mysqli_fetch_assoc($resultado);
 	unlink("anexos/{$resultado['nome']}");
 
-	$sqlRemover = "DELETE FROM anexos WHERE tarefa_id = {$id}";
+	$sqlRemover = "DELETE FROM anexos WHERE id = {$id}";
 
 	mysqli_query($conexao, $sqlRemover);
 
