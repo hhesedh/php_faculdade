@@ -1,11 +1,6 @@
 <?php 
 
-$bdServidor = 'localhost';
-$bdUsuario = 'sistematarefas';
-$bdSenha = 'sistema';
-$bdBanco = 'tarefas';
-
-$conexao = mysqli_connect($bdServidor, $bdUsuario, $bdSenha, $bdBanco);
+$conexao = mysqli_connect(BD_SERVIDOR, BD_USUARIO, BD_SENHA, BD_BANCO);
 
 if ($conexao->connect_errno) {
 	echo "Problemas para conectar no banco. Verifique dados!";

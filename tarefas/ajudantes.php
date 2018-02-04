@@ -1,5 +1,59 @@
 <?php
 
+
+function enviar_email($tarefa, $anexos) {
+
+	include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
+	$corpo = preparar_corpo_email($tarefa, $anexos);
+
+	// Acessar o sistema de e-mails;
+	// Fazer a autenticação com usuário e senha;
+	// Usar a opção para escrever um e-mail;
+	echo $anexos;
+	$email = new PHPMailer();
+
+	$email->isSMTP();
+	$email->Host = "smtp.gmail.com";
+	$email->Port = 587;
+	$email->SMTPSecure = 'tls';
+	$email->SMTPAuth = true;
+	$email->Username = "meuemail@mail.com";
+	$email->Password = "minhasenha";
+	$email->setFrom("meuemail@mail.com", "Avisor de Tarefas");
+	// Digitar o e-mail do destinatário;
+	$email->addAddress(EMAIL_NOTIFICACAO);
+	// Digitar o assunto do e-mail;
+	$email->Subject = "Aviso de tarefa: {$tarefa['nome']}:";
+	// Escrever o corpo do e-mail;
+	$email->msgHTML($corpo);
+	// Adicionar os anexos quando necessário;
+	foreach ($anexos as $anexo) {
+		$email->addAttachment("anexos/{$anexo['arquivo']}");
+	}
+	// Usar a opção de enviar e-mail.
+	$email->send();
+}
+
+function preparar_corpo_email($tarefa, $anexos){
+	// Aqui vamos pegar o conteúdo processado do template_email.php
+
+	// Falar para o PHP que não é para enviar o processamento para o
+	// navegador:
+	ob_start();
+
+	// Incluir o arquivo template_email.php:
+	include "template_email.php";
+
+	// Guardar o conteúdo do arquivo em uma variável;
+	$corpo = ob_get_contents();
+
+	// Falar para o PHP que ele pode voltar a mandar conteúdos para o 
+	// navegador.
+	ob_end_clean();
+
+	return $corpo;
+} 
+
 function traduz_prioridade($codigo){
 	$prioridade = '';
 	switch ($codigo) {
